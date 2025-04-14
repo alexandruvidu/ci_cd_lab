@@ -9,8 +9,12 @@ spec:
   strategy:
     canary:
       steps:
+        - setWeight: 25
+        - pause: { duration: 120s }
         - setWeight: 50
-        - pause: { duration: 60s }
+        - pause: { duration: 120s }
+        - setWeight: 75
+        - pause: { duration: 120s }
         - setWeight: 100
   selector:
     matchLabels:
@@ -22,7 +26,7 @@ spec:
     spec:
       containers:
         - name: webserver
-          image: ghcr.io/alexandruvidu/ci_cd_lab@sha256:bbd4372a61b2cd834443142570dcfda752baf704896ff8987fd4a52b9be9c8a2
+          image: ghcr.io/alexandruvidu/ci_cd_lab:latest
           ports:
             - containerPort: 8080
           imagePullPolicy: Always
